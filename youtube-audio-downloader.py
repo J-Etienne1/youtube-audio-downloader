@@ -1,7 +1,7 @@
 from pytubefix import YouTube
 import os
 
-yt = YouTube('Replace with URL')
+yt = YouTube('//////////')
 
 video = yt.streams.filter(only_audio=True).first()
 
