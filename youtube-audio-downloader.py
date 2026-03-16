@@ -1,12 +1,17 @@
-from pytubefix import YouTube
+import yt_dlp
 import os
 
-yt = YouTube('//////////')
+url = '/////'
 
-video = yt.streams.filter(only_audio=True).first()
+ydl_opts = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    'outtmpl': '%(title)s',
+}
 
-out_file = video.download(output_path=".")
-
-base, ext = os.path.splitext(out_file)
-new_file = base + '.mp3'
-os.rename(out_file, new_file)
+with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    ydl.download([url])
